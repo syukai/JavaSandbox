@@ -1,19 +1,21 @@
 package com.example.slidesoccer.domain.type;
 
 /**
- * 幅
+ * 高さ
  * @author hirayamadaisuke
  *
  */
-public class Width {
+public class Height {
 	int value;
-	Width(int value) {
+	Height(int value){
 		this.value = value;
 	}
-	public static Width of(int value) {
-		return new Width(value);
-	}
+	
 	public int getNum() {
 		return value;
+	}
+	
+	public static Height of(int value) {
+		return new Height(value);
 	}
 }
