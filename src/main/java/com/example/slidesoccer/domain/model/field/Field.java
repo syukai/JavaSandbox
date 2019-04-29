@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.slidesoccer.domain.model.panel.GoalPanel;
 import com.example.slidesoccer.domain.model.panel.Panel;
-import com.example.slidesoccer.domain.model.panel.Panels;
+import com.example.slidesoccer.domain.model.panel.GeneralPanels;
 import com.example.slidesoccer.domain.model.panel.SmallPanel;
 import com.example.slidesoccer.domain.model.panel.TallPanel;
 import com.example.slidesoccer.domain.model.panel.WidePanel;
@@ -19,7 +19,7 @@ public class Field {
 	Height height;
 	Width width;
 
-	Panels panels = new Panels();
+	GeneralPanels panels = new GeneralPanels();
 	List<SmallPanel> smallPanels;
 	List<TallPanel> tallPanels;
 	List<WidePanel> widePanels;
@@ -54,14 +54,13 @@ public class Field {
 	public boolean isGoal() {
 		return goalPanel.isGoal();
 	}
-	public void setSpaces(Space space, Space space2) {
-		this.spaces = new Spaces(space, space2);
-	}
 	public static FieldBuilder builder() {
 		return new FieldBuilder(Height.of(5), Width.of(4));
 	}
 	public boolean hasSpace(Position position) {
 		return this.spaces.contains(position);
 	}
+	
+	
 
 }
