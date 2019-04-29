@@ -25,10 +25,10 @@ public class Field {
 	List<WidePanel> widePanels;
 	GoalPanel goalPanel;
 	Spaces spaces;
-	Field() {
-		this.height = Height.of(5);
-		this.width = Width.of(4);
-	}
+//	Field() {
+//		this.height = Height.of(5);
+//		this.width = Width.of(4);
+//	}
 	public Field(FieldBuilder builder) {
 		this.height = builder.height;
 		this.width = builder.width;
@@ -45,12 +45,12 @@ public class Field {
 		spaces = panels.findSpaces(height, width);
 		System.out.println(spaces.toString());
 	}
-	public void setSmallPanel(int x, int y) {
-//		cubes.add(new SmallCube(new Coordinate(1, 1)));
-	}
-	public void setGoalPanel(Position position) {
-		this.goalPanel = new GoalPanel(position);
-	}
+//	public void setSmallPanel(int x, int y) {
+////		cubes.add(new SmallCube(new Coordinate(1, 1)));
+//	}
+//	public void setGoalPanel(Position position) {
+//		this.goalPanel = new GoalPanel(position);
+//	}
 	public boolean isGoal() {
 		return goalPanel.isGoal();
 	}

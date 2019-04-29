@@ -8,11 +8,11 @@ import com.example.slidesoccer.domain.type.position.Position;
 public class Spaces {
 	List<Space> spaces;
 	
-	public Spaces(Space space1, Space space2) {
-		this.spaces = new ArrayList<Space>();
-		this.spaces.add(space1);
-		this.spaces.add(space2);
-	}
+//	public Spaces(Space space1, Space space2) {
+//		this.spaces = new ArrayList<Space>();
+//		this.spaces.add(space1);
+//		this.spaces.add(space2);
+//	}
 	public Spaces(List<Space> list) {
 		this.spaces = list;
 	}
