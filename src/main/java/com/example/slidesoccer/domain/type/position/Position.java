@@ -13,8 +13,14 @@ public class Position {
 	public Position down() {
 		return new Position(x, Y.of(y.value+1));
 	}
+	public Position up() {
+		return new Position(x, Y.of(y.value-1));
+	}
 	public Position right() {
 		return new Position(X.of(x.value+1), y);
+	}
+	public Position left() {
+		return new Position(X.of(x.value-1), y);
 	}
 	
 	@Override
