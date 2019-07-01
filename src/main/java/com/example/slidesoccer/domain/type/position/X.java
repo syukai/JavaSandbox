@@ -13,4 +13,12 @@ public class X {
 	boolean equals(X x) {
 		return this.value == x.value;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + value;
+		return result;
+	}
+	
 }

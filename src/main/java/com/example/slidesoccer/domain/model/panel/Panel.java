@@ -39,10 +39,35 @@ public abstract class Panel {
 	public abstract Panel getMoved(Position position);
 
 	public Spaces getMovedSpaces(Spaces spaces, Position target) {
+		// Panel種類毎に移動後のスペースを取るようにする（ここはabstractに変更する）
 		Spaces movedSpaces = new Spaces(
 				new Space(new Position(X.of(1), Y.of(2)))
 				, new Space(new Position(X.of(2), Y.of(3)))
 				);
 		return movedSpaces;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Panel other = (Panel) obj;
+		if (!position.equals(other.position))
+			return false;
+		return true;
+	}
+	
+	
 }

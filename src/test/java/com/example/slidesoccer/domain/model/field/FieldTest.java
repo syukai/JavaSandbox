@@ -99,16 +99,22 @@ class FieldTest {
 		
 		Moves moves2 = field.getCanMoves();
 		
-		System.out.println(field.toString());
-		System.out.println();
-		System.out.println(field.spaces.toString());
+		// 移動できるヶ所は4ヶ所あるが、手戻しはしないので3ヶ所
+		assertEquals(3, moves2.size());
+		
 		System.out.println(moves2.toString());
-
-		assertEquals(1, moves2.size());
-		assertTrue(moves2.containsSource(new SmallPanel(new Position(X.of(2), Y.of(1)))));
-		assertTrue(moves2.containsSource(new SmallPanel(new Position(X.of(1), Y.of(2)))));
-		
-		
+		assertTrue(moves2.contains(new Move(new SmallPanel(new Position(X.of(2), Y.of(1)))
+				, new Position(X.of(2), Y.of(2)))
+				));
+		assertFalse(moves2.contains(new Move(new SmallPanel(new Position(X.of(1), Y.of(2)))
+				, new Position(X.of(1), Y.of(1)))
+				));
+		assertTrue(moves2.contains(new Move(new SmallPanel(new Position(X.of(1), Y.of(2)))
+				, new Position(X.of(2), Y.of(2)))
+				));
+		assertTrue(moves2.contains(new Move(new SmallPanel(new Position(X.of(2), Y.of(1)))
+				, new Position(X.of(1), Y.of(1)))
+				));
 	}
 
 }

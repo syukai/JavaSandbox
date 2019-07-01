@@ -2,6 +2,7 @@ package com.example.slidesoccer.domain.model.panel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.example.slidesoccer.domain.model.move.Move;
@@ -16,30 +17,13 @@ import com.example.slidesoccer.domain.type.position.Y;
 
 public class GeneralPanels {
 	List<Panel> panels;
+	ArrayList<Move> movedHistory = new ArrayList<>();
 	
 	Panels<SmallPanel> smallPanels = new Panels<>();
 	Panels<TallPanel> tallPanels = new Panels<>();
 	Panels<WidePanel> widePanels = new Panels<>();
 	GoalPanel goalPanel;
 	
-//	public GeneralPanels() {
-//		panels = new ArrayList<>();
-//	}
-//	
-//	public GeneralPanels(List<Panel> list) {
-//		panels = list;
-//		
-//		for(Panel p:panels) {
-//			if(p instanceof SmallPanel) {
-//				smallPanels.add((SmallPanel)p);
-//			}else if(p instanceof TallPanel) {
-//				tallPanels.add((TallPanel)p);
-//			}else if(p instanceof WidePanel) {
-//				widePanels.add((WidePanel)p);
-//			}
-//		}
-//		
-//	}
 	
 	public GeneralPanels(List<SmallPanel> smallList
 			,List<TallPanel> tallList
@@ -57,24 +41,6 @@ public class GeneralPanels {
 		panels.add(goal);
 	}
 	
-//	public void addAll(List<? extends Panel> adder) {
-//		for(Panel p:adder) {
-//			add(p);
-//		}
-//	}
-//	public void add(Panel adder) {
-//		panels.add(adder);
-//		subAdd(adder);
-//	}
-//	private void subAdd(Panel p) {
-//		if(p instanceof SmallPanel) {
-//			smallPanels.add((SmallPanel)p);
-//		}else if(p instanceof TallPanel) {
-//			tallPanels.add((TallPanel)p);
-//		}else if(p instanceof WidePanel) {
-//			widePanels.add((WidePanel)p);
-//		}
-//	}
 	
 	public boolean isGoal() {
 		return goalPanel.isGoal();
@@ -100,16 +66,35 @@ public class GeneralPanels {
 				.collect(Collectors.toList()));
 	}
 	
+	private Optional<Move> getLastMove() {
+		if(movedHistory.size()>0)
+			return Optional.of(movedHistory.get(movedHistory.size()-1));
+		
+		return Optional.empty();
+	}
+	
 	public List<Move> getCanMoves(Spaces spaces) {
+		Optional<Move> lastMove = getLastMove();
 		ArrayList<Move> moves = new ArrayList<>();
 		panels.forEach(p -> {
 			moves.addAll(p.getCanMove(spaces));
 		});
+		
+		if(!lastMove.isPresent())
+			return moves;
+		
+		// 直前に戻すのは除外
+		for(Move m: moves) {
+			if(m.isReverse(lastMove.get())) {
+				moves.remove(m);
+				break;
+			}
+		}
+		
 		return moves;
 	}
 	
 	public boolean equals(GeneralPanels target) {
-//		GeneralPanels target = (GeneralPanels)object;
 		if((size()!=target.size())) return false;
 		
 		if(!smallPanels.isSameList(target.smallPanels)) return false;
@@ -131,6 +116,7 @@ public class GeneralPanels {
 				Moved moved = move.move(spaces);
 				panels.remove(p);
 				panels.add(moved.getMovedPanel());
+				movedHistory.add(move);
 				return moved.getSpaces();
 			}
 		}

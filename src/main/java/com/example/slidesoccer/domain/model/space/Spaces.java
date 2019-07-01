@@ -57,10 +57,12 @@ public class Spaces {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("[Spaces]");
 		for(Space s:spaces) {
 			sb.append(s.toString());
-			sb.append(System.getProperty("line.separator"));
+			sb.append(",");
 		}
+		sb.append(System.getProperty("line.separator"));
 		return sb.toString();
 	}
 }

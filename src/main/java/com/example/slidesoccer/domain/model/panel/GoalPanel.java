@@ -35,8 +35,6 @@ public class GoalPanel extends Panel {
 	public List<Move> getCanMove(Spaces spaces) {
 		ArrayList<Move> moves = new ArrayList<>();
 		if(spaces.hasWideUp(position)) {
-			System.out.println("spaces=" + spaces);
-			System.out.println("GoalPanel=" + position);
 			moves.add(new Move(this, position.up()));
 		}
 		if(spaces.hasWideDown(position)) 

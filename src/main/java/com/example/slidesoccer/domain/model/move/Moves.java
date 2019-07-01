@@ -15,6 +15,13 @@ public class Moves {
 	public int size() {
 		return list.size();
 	}
+	
+	public boolean contains(Move move) {
+		for(Move m:list) {
+			if(m.equals(move)) return true;
+		}
+		return false;
+	}
 
 	public boolean containsSource(Panel source) {
 		for(Move m:list) {
