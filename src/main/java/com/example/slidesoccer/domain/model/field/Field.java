@@ -51,6 +51,14 @@ public class Field {
 	public String toString() {
 		return panels.toString();
 	}
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((height == null) ? 0 : height.hashCode());
+		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
+		result = prime * result + ((width == null) ? 0 : width.hashCode());
+		return result;
+	}
 
 }

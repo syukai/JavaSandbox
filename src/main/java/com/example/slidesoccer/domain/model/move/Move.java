@@ -1,14 +1,8 @@
 package com.example.slidesoccer.domain.model.move;
 
-import java.util.List;
-
 import com.example.slidesoccer.domain.model.panel.Panel;
-import com.example.slidesoccer.domain.model.panel.SmallPanel;
-import com.example.slidesoccer.domain.model.space.Space;
 import com.example.slidesoccer.domain.model.space.Spaces;
 import com.example.slidesoccer.domain.type.position.Position;
-import com.example.slidesoccer.domain.type.position.X;
-import com.example.slidesoccer.domain.type.position.Y;
 
 public class Move {
 	Panel source;

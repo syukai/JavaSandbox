@@ -16,7 +16,7 @@ import com.example.slidesoccer.domain.type.position.Y;
  */
 public class GoalPanel extends Panel {
 	public GoalPanel(Position position){
-		super(position);
+		super(PanelType.GoalPanel, position);
 	}
 
 	public boolean isGoal() {

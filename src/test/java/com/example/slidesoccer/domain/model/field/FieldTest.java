@@ -102,7 +102,6 @@ class FieldTest {
 		// 移動できるヶ所は4ヶ所あるが、手戻しはしないので3ヶ所
 		assertEquals(3, moves2.size());
 		
-		System.out.println(moves2.toString());
 		assertTrue(moves2.contains(new Move(new SmallPanel(new Position(X.of(2), Y.of(1)))
 				, new Position(X.of(2), Y.of(2)))
 				));
@@ -117,4 +116,23 @@ class FieldTest {
 				));
 	}
 
+	@Test
+	@DisplayName("ハッシュ値")
+	void HashEquals() {
+		Field field = builder.create();
+		Field field2 = builder.create();
+		
+		assertEquals(field.hashCode(), field2.hashCode());
+
+		Move move = new Move(new SmallPanel(new Position(X.of(1), Y.of(1)))
+				, new Position(X.of(1), Y.of(2)));
+		field.move(move);
+		
+		assertNotEquals(field.hashCode(), field2.height.hashCode());
+		
+		field2.move(move);
+		
+		assertEquals(field.hashCode(), field2.hashCode());
+		
+	}
 }

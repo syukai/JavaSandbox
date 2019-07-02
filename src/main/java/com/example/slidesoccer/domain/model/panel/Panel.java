@@ -16,8 +16,10 @@ import com.example.slidesoccer.domain.type.position.Y;
  */
 public abstract class Panel {
 	Position position;
-	public Panel(Position position){
+	PanelType type;
+	public Panel(PanelType type, Position position){
 		this.position = position;
+		this.type = type;
 	}
 	
 	public boolean isPosition(Position position) {
@@ -52,6 +54,7 @@ public abstract class Panel {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 

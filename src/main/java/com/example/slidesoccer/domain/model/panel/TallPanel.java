@@ -10,7 +10,7 @@ import com.example.slidesoccer.domain.type.position.Position;
 public class TallPanel extends Panel {
 
 	public TallPanel(Position position) {
-		super(position);
+		super(PanelType.TallPanel, position);
 	}
 
 	@Override

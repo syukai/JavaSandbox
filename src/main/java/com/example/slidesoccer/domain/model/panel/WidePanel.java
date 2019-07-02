@@ -10,7 +10,7 @@ import com.example.slidesoccer.domain.type.position.Position;
 public class WidePanel extends Panel {
 
 	public WidePanel(Position position) {
-		super(position);
+		super(PanelType.WidePanel, position);
 	}
 
 	@Override

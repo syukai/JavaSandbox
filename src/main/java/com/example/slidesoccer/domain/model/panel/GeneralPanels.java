@@ -125,6 +125,15 @@ public class GeneralPanels {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
+		return result;
+	}
+
+
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
