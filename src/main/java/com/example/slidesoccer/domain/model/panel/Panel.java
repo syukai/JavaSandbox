@@ -25,7 +25,7 @@ public abstract class Panel {
 	public boolean isPosition(Position position) {
 		return this.position.is(position);
 	}
-	
+	// このパネルが占めている場所
 	public abstract List<Position> positions();
 
 	public boolean isMatch(Panel source) {
@@ -70,6 +70,10 @@ public abstract class Panel {
 		if (!position.equals(other.position))
 			return false;
 		return true;
+	}
+
+	public Position getPosition() {
+		return position;
 	}
 	
 	
