@@ -23,5 +23,4 @@ class MoveTest {
 		
 		assertTrue(reverse.source.isPosition(new Position(X.of(2), Y.of(2))));
 	}
-
 }

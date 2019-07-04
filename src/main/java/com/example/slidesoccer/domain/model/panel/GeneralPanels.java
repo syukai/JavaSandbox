@@ -124,6 +124,18 @@ public class GeneralPanels {
 		throw new RuntimeException("Movable panels is not found.");
 	}
 	
+	// 
+	public Spaces undo(Spaces spaces) {
+		Optional<Move> lastMove = getLastMove();
+		if(lastMove.isEmpty()) {
+			throw new RuntimeException("undo対象なし");
+		}
+		
+		Move reverse = lastMove.get().getReverse();
+		movedHistory.remove(movedHistory.size()-1);
+		return move(reverse, spaces);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

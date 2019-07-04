@@ -14,6 +14,7 @@ public class Field {
 
 	GeneralPanels panels;
 	Spaces spaces;
+	final Moves canMoves;
 
 	public Field(FieldBuilder builder) {
 		this.height = builder.height;
@@ -26,6 +27,7 @@ public class Field {
 				, builder.goalPanel);
 		
 		spaces = panels.findSpaces(height, width);
+		canMoves = new Moves(panels.getCanMoves(spaces));
 	}
 	public boolean isGoal() {
 		return panels.isGoal();
@@ -37,13 +39,17 @@ public class Field {
 		return this.spaces.contains(position);
 	}
 	public Moves getCanMoves() {
-		return new Moves(panels.getCanMoves(spaces));
-		
+		return canMoves;
 	}
 	
 	public void move(Move move) {
 		panels.move(move, spaces);
 		// TODO:findSpacesはコストが高いのでmoveのときにspacesを再生成したい
+		spaces = panels.findSpaces(height, width);
+	}
+	
+	public void undo() {
+		panels.undo(spaces);
 		spaces = panels.findSpaces(height, width);
 	}
 	

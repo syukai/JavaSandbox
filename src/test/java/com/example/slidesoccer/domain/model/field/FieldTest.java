@@ -117,22 +117,45 @@ class FieldTest {
 	}
 
 	@Test
-	@DisplayName("ハッシュ値")
+	@DisplayName("ハッシュ値で同じ盤面か判断する")
 	void HashEquals() {
 		Field field = builder.create();
 		Field field2 = builder.create();
 		
 		assertEquals(field.hashCode(), field2.hashCode());
 
+		// 一方をMoveしたら一致しない
 		Move move = new Move(new SmallPanel(new Position(X.of(1), Y.of(1)))
 				, new Position(X.of(1), Y.of(2)));
 		field.move(move);
-		
 		assertNotEquals(field.hashCode(), field2.height.hashCode());
 		
+		// 同じようにMoveしたら一致する
 		field2.move(move);
-		
 		assertEquals(field.hashCode(), field2.hashCode());
-		
 	}
+	
+	@Test
+	@DisplayName("1回Moveして1回Undo")
+	void Undo() {
+		Field field = builder.create();
+		Field field2 = builder.create();
+
+		//  STT
+		// S TT
+		// GGSS
+		// GGWW
+		// SSWW
+		Move move = new Move(new SmallPanel(new Position(X.of(1), Y.of(1)))
+				, new Position(X.of(1), Y.of(2)));
+		
+		field.move(move);
+		
+		assertNotEquals(field2.hashCode(), field.hashCode());
+		
+		field.undo();
+		
+		assertEquals(field2.hashCode(), field.hashCode());
+	}
+	
 }
