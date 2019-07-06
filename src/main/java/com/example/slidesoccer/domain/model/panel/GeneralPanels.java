@@ -1,8 +1,10 @@
 package com.example.slidesoccer.domain.model.panel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.example.slidesoccer.domain.model.move.Move;
@@ -16,7 +18,7 @@ import com.example.slidesoccer.domain.type.position.X;
 import com.example.slidesoccer.domain.type.position.Y;
 
 public class GeneralPanels {
-	List<Panel> panels;
+	Set<Panel> panels;
 	ArrayList<Move> movedHistory = new ArrayList<>();
 	
 	Panels<SmallPanel> smallPanels = new Panels<>();
@@ -34,7 +36,7 @@ public class GeneralPanels {
 		widePanels = new Panels<>(wideList);
 		goalPanel = goal;
 		
-		panels = new ArrayList<>();
+		panels = new HashSet<>();
 		panels.addAll(smallList);
 		panels.addAll(tallList);
 		panels.addAll(wideList);
