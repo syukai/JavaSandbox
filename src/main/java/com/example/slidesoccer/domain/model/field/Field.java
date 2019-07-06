@@ -14,7 +14,7 @@ public class Field {
 
 	GeneralPanels panels;
 	Spaces spaces;
-	final Moves canMoves;
+	Moves canMoves;
 
 	public Field(FieldBuilder builder) {
 		this.height = builder.height;
@@ -46,11 +46,13 @@ public class Field {
 		panels.move(move, spaces);
 		// TODO:findSpacesはコストが高いのでmoveのときにspacesを再生成したい
 		spaces = panels.findSpaces(height, width);
+		canMoves = new Moves(panels.getCanMoves(spaces));
 	}
 	
 	public void undo() {
 		panels.undo(spaces);
 		spaces = panels.findSpaces(height, width);
+		canMoves = new Moves(panels.getCanMoves(spaces));
 	}
 	
 	@Override

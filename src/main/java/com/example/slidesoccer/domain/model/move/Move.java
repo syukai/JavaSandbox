@@ -14,7 +14,7 @@ public class Move {
 	}
 	
 	public boolean isMatch(Panel target) {
-		return this.source.isMatch(source);
+		return this.source.isMatch(target);
 	}
 	
 	public boolean isReverse(Move other) {

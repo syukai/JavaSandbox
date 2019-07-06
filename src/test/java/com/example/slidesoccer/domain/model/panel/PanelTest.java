@@ -20,4 +20,11 @@ class PanelTest {
 		assertEquals(small1.hashCode(), small2.hashCode());
 	}
 
+	@Test
+	void testIsMatch() {
+		SmallPanel small1 = new SmallPanel(new Position(X.of(2), Y.of(1)));
+		SmallPanel small2 = new SmallPanel(new Position(X.of(1), Y.of(2)));
+		
+		assertFalse(small1.isMatch(small2));
+	}
 }

@@ -1,6 +1,9 @@
 package com.example.slidesoccer.domain.model.field;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +14,6 @@ import com.example.slidesoccer.domain.model.move.Moves;
 import com.example.slidesoccer.domain.model.panel.GoalPanel;
 import com.example.slidesoccer.domain.model.panel.SmallPanel;
 import com.example.slidesoccer.domain.model.panel.WidePanel;
-import com.example.slidesoccer.domain.model.space.Space;
 import com.example.slidesoccer.domain.type.position.Position;
 import com.example.slidesoccer.domain.type.position.X;
 import com.example.slidesoccer.domain.type.position.Y;
@@ -114,6 +116,7 @@ class FieldTest {
 		assertTrue(moves2.contains(new Move(new SmallPanel(new Position(X.of(2), Y.of(1)))
 				, new Position(X.of(1), Y.of(1)))
 				));
+		
 	}
 
 	@Test

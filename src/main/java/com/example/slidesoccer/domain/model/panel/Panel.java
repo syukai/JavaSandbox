@@ -32,7 +32,6 @@ public abstract class Panel {
 		if(!this.getClass().getName().equals(source.getClass().getName())) return false;
 		
 		if(!isPosition(source.position)) return false;
-		
 		return true;
 	}
 	
@@ -47,6 +46,10 @@ public abstract class Panel {
 				, new Space(new Position(X.of(2), Y.of(3)))
 				);
 		return movedSpaces;
+	}
+	
+	public String toString() {
+		return type.toString() + ": " + position.toString();
 	}
 
 	@Override

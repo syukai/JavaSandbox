@@ -23,4 +23,15 @@ class MoveTest {
 		
 		assertTrue(reverse.source.isPosition(new Position(X.of(2), Y.of(2))));
 	}
+	
+	@Test
+	@DisplayName("isMatch")
+	void testIsMatch() {
+		SmallPanel small = new SmallPanel(new Position(X.of(2), Y.of(1)));
+		SmallPanel smallMove = new SmallPanel(new Position(X.of(1), Y.of(2)));
+		Move move = new Move(smallMove, new Position(X.of(1), Y.of(1)));
+		
+		assertFalse(move.isMatch(small));
+				
+	}
 }
