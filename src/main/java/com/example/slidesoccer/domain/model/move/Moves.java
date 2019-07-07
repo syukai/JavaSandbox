@@ -30,6 +30,16 @@ public class Moves {
 		return false;
 	}
 	
+	/**
+	 * 最後の1件を取り出して削除する
+	 * @return
+	 */
+	public Move retrieve() {
+		Move result = list.get(list.size()-1);
+		list.remove(list.size()-1);
+		return result;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -37,6 +47,10 @@ public class Moves {
 			sb.append(m.toString());
 		}
 		return sb.toString();
+	}
+
+	public boolean hasMove() {
+		return list.size() > 0;
 	}
 
 }
