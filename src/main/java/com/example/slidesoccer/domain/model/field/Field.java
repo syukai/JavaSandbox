@@ -15,10 +15,12 @@ public class Field {
 	GeneralPanels panels;
 	Spaces spaces;
 	Moves canMoves;
+	int count;
 
 	public Field(FieldBuilder builder) {
 		this.height = builder.height;
 		this.width = builder.width;
+		this.count = 0;
 		
 		panels = new GeneralPanels(
 				builder.smallPanels
@@ -47,12 +49,17 @@ public class Field {
 		// TODO:findSpacesはコストが高いのでmoveのときにspacesを再生成したい
 		spaces = panels.findSpaces(height, width);
 		canMoves = new Moves(panels.getCanMoves(spaces));
+		count++;
 	}
+//	public void move() {
+//		move(canMoves.retrieve());
+//	}
 	
 	public void undo() {
 		panels.undo(spaces);
 		spaces = panels.findSpaces(height, width);
 		canMoves = new Moves(panels.getCanMoves(spaces));
+		count--;
 	}
 	
 	@Override
@@ -64,9 +71,13 @@ public class Field {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((height == null) ? 0 : height.hashCode());
-		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
 		result = prime * result + ((width == null) ? 0 : width.hashCode());
+		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
 		return result;
+	}
+	
+	public FieldHistory createHistory() {
+		return new FieldHistory(this, canMoves, count);
 	}
 
 }
