@@ -52,6 +52,7 @@ class FieldHistoryTest {
 		// SSWW
 		Move move = new Move(new SmallPanel(new Position(X.of(1), Y.of(1)))
 				, new Position(X.of(1), Y.of(2)));
+		
 		field.move(move);
 		assertFalse(fh.isMatch(field));
 		
@@ -59,4 +60,22 @@ class FieldHistoryTest {
 		field.undo();
 		assertTrue(fh.isMatch(field));
 	}
+	
+	@Test
+	@DisplayName("Historyに含まれるMoveを元に動かす")
+	void testMoByMoveInHistory() {
+		Field field = new Field(builder);
+		FieldHistory fh = field.createHistory();
+		ArrayList<FieldHistory> fhList = new ArrayList<>();
+		fhList.add(fh);
+		
+		field.move(fh.retrieveMove());
+		fhList.add(field.createHistory());
+		
+		assertFalse(fh.isMatch(field));
+		
+		field.undo();
+		assertTrue(fh.isMatch(field));
+	}
+
 }
