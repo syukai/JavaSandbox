@@ -3,6 +3,7 @@ package com.example.slidesoccer.domain.model.field;
 import com.example.slidesoccer.domain.model.move.Move;
 import com.example.slidesoccer.domain.model.move.Moves;
 import com.example.slidesoccer.domain.model.panel.GeneralPanels;
+import com.example.slidesoccer.domain.model.panel.UndoNotFoundException;
 import com.example.slidesoccer.domain.model.space.Spaces;
 import com.example.slidesoccer.domain.type.Height;
 import com.example.slidesoccer.domain.type.Width;
@@ -55,11 +56,16 @@ public class Field {
 //		move(canMoves.retrieve());
 //	}
 	
-	public void undo() {
-		panels.undo(spaces);
-		spaces = panels.findSpaces(height, width);
-		canMoves = new Moves(panels.getCanMoves(spaces));
-		count--;
+	public boolean undo() {
+		try {
+			panels.undo(spaces);
+			spaces = panels.findSpaces(height, width);
+//			canMoves = new Moves(panels.getCanMoves(spaces));
+			count--;
+			return true;
+		} catch (UndoNotFoundException e) {
+			return false;
+		}
 	}
 	
 	@Override

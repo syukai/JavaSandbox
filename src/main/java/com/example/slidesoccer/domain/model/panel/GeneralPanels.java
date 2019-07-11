@@ -113,12 +113,15 @@ public class GeneralPanels {
 	}
 	
 	public Spaces move(Move move, Spaces spaces) {
+		return move(move, spaces, true);
+	}
+	private Spaces move(Move move, Spaces spaces, boolean isNewMove) {
 		for(Panel p: panels) {
 			if(move.isMatch(p)) {
 				Moved moved = move.move(spaces);
 				panels.remove(p);
 				panels.add(moved.getMovedPanel());
-				movedHistory.add(move);
+				if(isNewMove)movedHistory.add(move);
 				return moved.getSpaces();
 			}
 		}
@@ -127,15 +130,16 @@ public class GeneralPanels {
 	}
 	
 	// 
-	public Spaces undo(Spaces spaces) {
+	public Spaces undo(Spaces spaces) throws UndoNotFoundException {
 		Optional<Move> lastMove = getLastMove();
 		if(lastMove.isEmpty()) {
-			throw new RuntimeException("undo対象なし");
+			throw new UndoNotFoundException();
 		}
 		
 		Move reverse = lastMove.get().getReverse();
+		
 		movedHistory.remove(movedHistory.size()-1);
-		return move(reverse, spaces);
+		return move(reverse, spaces, false);
 	}
 	
 	@Override
