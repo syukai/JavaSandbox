@@ -19,7 +19,7 @@ import com.example.slidesoccer.domain.type.position.Y;
 
 public class GeneralPanels {
 	Set<Panel> panels;
-	ArrayList<Move> movedHistory = new ArrayList<>();
+	List<Move> movedHistory = new ArrayList<>();
 	
 	Panels<SmallPanel> smallPanels = new Panels<>();
 	Panels<TallPanel> tallPanels = new Panels<>();
@@ -160,5 +160,16 @@ public class GeneralPanels {
 			sb.append(System.getProperty("line.separator"));
 		}
 		return sb.toString();
+	}
+
+
+	public List<Move> getMovedHistories() {
+		return this.movedHistory.subList(0, this.movedHistory.size());
+	}
+	
+	public void swapMovedHistoriesIfMoreFew(List<Move> anotherHistories) {
+		if(movedHistory.size()>anotherHistories.size()) {
+			this.movedHistory = anotherHistories;
+		}
 	}
 }

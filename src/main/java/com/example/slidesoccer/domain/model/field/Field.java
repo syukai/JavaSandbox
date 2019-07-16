@@ -1,5 +1,7 @@
 package com.example.slidesoccer.domain.model.field;
 
+import java.util.List;
+
 import com.example.slidesoccer.domain.model.move.Move;
 import com.example.slidesoccer.domain.model.move.Moves;
 import com.example.slidesoccer.domain.model.panel.GeneralPanels;
@@ -84,6 +86,14 @@ public class Field {
 	
 	public FieldHistory createHistory() {
 		return new FieldHistory(this, canMoves, count);
+	}
+	
+	List<Move> getMovedHistories() {
+		return panels.getMovedHistories();
+	}
+	
+	void swapMovedHistoriesIfMoreFew(List<Move> anotherHistories) {
+		panels.swapMovedHistoriesIfMoreFew(anotherHistories);
 	}
 
 }
