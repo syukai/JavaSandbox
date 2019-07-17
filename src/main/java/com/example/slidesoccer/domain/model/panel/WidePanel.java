@@ -27,7 +27,7 @@ public class WidePanel extends Panel {
 		if(spaces.hasWideDown(position)) {
 			moves.add(new Move(this, position.down()));
 		}
-		if(spaces.hasRight(position)) {
+		if(spaces.hasRight(position.right())) {
 			moves.add(new Move(this, position.right()));
 		}
 		if(spaces.hasLeft(position)) {
