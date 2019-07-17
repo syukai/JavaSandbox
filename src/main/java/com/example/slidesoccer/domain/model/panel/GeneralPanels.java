@@ -121,6 +121,9 @@ public class GeneralPanels {
 				Moved moved = move.move(spaces);
 				panels.remove(p);
 				panels.add(moved.getMovedPanel());
+				if(p.type.equals(PanelType.GoalPanel)) {
+					goalPanel = (GoalPanel)moved.getMovedPanel();
+				}
 				if(isNewMove)movedHistory.add(move);
 				return moved.getSpaces();
 			}
