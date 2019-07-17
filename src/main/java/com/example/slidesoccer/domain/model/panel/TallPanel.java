@@ -24,7 +24,7 @@ public class TallPanel extends Panel {
 		if(spaces.hasUp(position)) {
 			moves.add(new Move(this, position.up()));
 		}
-		if(spaces.hasDown(position)) {
+		if(spaces.hasDown(position.down())) {
 			moves.add(new Move(this, position.down()));
 		}
 		if(spaces.hasTallRight(position)) {
