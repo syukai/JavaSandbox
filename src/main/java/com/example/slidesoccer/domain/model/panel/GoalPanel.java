@@ -37,9 +37,9 @@ public class GoalPanel extends Panel {
 		if(spaces.hasWideUp(position)) {
 			moves.add(new Move(this, position.up()));
 		}
-		if(spaces.hasWideDown(position)) 
+		if(spaces.hasWideDown(position.down())) 
 			moves.add(new Move(this, position.down()));
-		if(spaces.hasTallRight(position)) 
+		if(spaces.hasTallRight(position.right())) 
 			moves.add(new Move(this, position.right()));
 		if(spaces.hasTallLeft(position)) 
 			moves.add(new Move(this, position.left()));
