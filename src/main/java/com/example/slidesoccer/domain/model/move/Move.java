@@ -67,7 +67,7 @@ public class Move {
 	public String toString() {
 		return "[" + source.getClass().getSimpleName() + "]" +
 				source.positions().toString() + " -> " +
-				targetPosition.toString() + System.getProperty("line.separator");
+				targetPosition.toString();// + System.getProperty("line.separator");
 	}
 
 	public Move getReverse() {

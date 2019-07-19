@@ -48,45 +48,11 @@ class FieldHistoriesTest {
 		assertTrue(fHistories.contains(field));
 	}
 	
-	@Test
-	@DisplayName("手詰まりになったら修了")
-	void test() {
-		FieldHistories fHistories = new FieldHistories();
-		Field field = builder.create();
-		
-		// まだ今のFieldはHistoriesに存在しない
-		assertFalse(fHistories.contains(field));
-		
-		// Historyに追加
-		fHistories.add(field);
-		
-		// 動かせるところがあれば動かす、なければundoする
-		int cnt = 0;
-		while(true) {
-			if(fHistories.hasMove(field)) {
-				Move move = fHistories.retrieveMove(field);
-				field.move(move);
-				if(fHistories.contains(field)) {
-					field.undo();
-				} else {
-					fHistories.add(field);
-				}
-				
-			} else {
-				
-				if(!field.undo()) {
-//					System.out.println("終了！！！");
-					// 3回探索、3回Undoで終了
-					assertEquals(6, cnt);
-					return;
-				}
-			}
-			cnt++;
-			if(cnt>20) {
-				fail("無限ループ");
-			}
-		}
-	}
+//	@Test
+//	@DisplayName("手詰まりになったら修了")
+//	void test() {
+//		assertFalse(testRunning(builder, 20, 6));
+//	}
 
 	@Test
 	@DisplayName("同じ盤面になったら探索中止する")
@@ -100,75 +66,76 @@ class FieldHistoriesTest {
 				.wide(X.of(3), Y.of(1))
 				.wide(X.of(1), Y.of(2))
 				.wide(X.of(3), Y.of(2))
-				.wide(X.of(3), Y.of(1))
+				.wide(X.of(1), Y.of(3))
 				.wide(X.of(3), Y.of(3))
 				.goal(X.of(1), Y.of(4))
 				.tall(X.of(3), Y.of(4))
 				.tall(X.of(4), Y.of(4));
-		
-		FieldHistories fHistories = new FieldHistories();
-		Field field = builder.create();
-		
-		// まだ今のFieldはHistoriesに存在しない
-		assertFalse(fHistories.contains(field));
-		
-		// Historyに追加
-		fHistories.add(field);
-		
-		// 動かせるところがあれば動かす、なければundoする
-		int cnt = 0;
-		while(true) {
-			if(fHistories.hasMove(field)) {
-				Move move = fHistories.retrieveMove(field);
-				field.move(move);
-				if(fHistories.contains(field)) {
-					field.undo();
-				} else {
-					fHistories.add(field);
-				}
-				if(field.isGoal()) {
-					System.out.println("ゴール！！！");
-					return;
-				}
-				
-			} else {
-				
-				if(!field.undo()) {
-					System.out.println("終了！！！(cnt=" + cnt + ",histories=" + fHistories.size() + ")");
-//					assertEquals(9, fHistories.size());
-					// 3回探索、3回Undoで終了
-//					assertEquals(6, cnt);
-					return;
-				}
-			}
-			cnt++;
-			if(cnt>400) {
-				fail("無限ループ");
-			}
-		}
+		System.out.println("同じ盤面になったら探索中止");
+		assertFalse(testRunning(builder, 400, 0));
 	}
-
+	
 	@Test
-	@DisplayName("ゴールまで探索")
-	void testSearchGoal() {
+	@DisplayName("ゴールまで探索 1手")
+	void testSearchGoal2() {
 		// SSTT
-		//   TT
-		// GGSS
-		// GGWW
+		// SSTT
 		// SSWW
+		// GG T
+		// GG T
 		builder = Field.builder()
 				.small(X.of(1), Y.of(1))
 				.small(X.of(2), Y.of(1))
 				.tall(X.of(3), Y.of(1))
 				.tall(X.of(4), Y.of(1))
-				.goal(X.of(1), Y.of(3))
-				.small(X.of(3), Y.of(3))
-				.small(X.of(4), Y.of(3))
-				.wide(X.of(3), Y.of(4))
-				.small(X.of(1), Y.of(5))
-				.small(X.of(2), Y.of(5))
-				.wide(X.of(3), Y.of(5));
+				.small(X.of(1), Y.of(2))
+				.small(X.of(2), Y.of(2))
+				.small(X.of(1), Y.of(3))
+				.small(X.of(2), Y.of(3))
+				.wide(X.of(3), Y.of(3))
+				.goal(X.of(1), Y.of(4))
+				.tall(X.of(4), Y.of(4));
 		
+		System.out.println("ゴールまで探索 1手");
+		boolean result = testRunning(builder, 1000, 0);
+		System.out.println("ゴールまで探索 1手 探索終了");
+		if(!result) {
+			fail("ゴールできず");
+		}
+	}
+
+//	@Test
+//	@DisplayName("ゴールまで探索 3")
+//	void testSearchGoal3() {
+//		// SSST
+//		// T SS
+//		// T WW
+//		// GGSS
+//		// GGSS
+//		builder = Field.builder()
+//				.small(X.of(1), Y.of(1))
+//				.small(X.of(2), Y.of(1))
+//				.small(X.of(3), Y.of(1))
+//				.tall(X.of(4), Y.of(1))
+//				.tall(X.of(1), Y.of(2))
+//				.small(X.of(2), Y.of(3))
+//				.small(X.of(2), Y.of(4))
+//				.wide(X.of(3), Y.of(3))
+//				.goal(X.of(1), Y.of(4))
+//				.small(X.of(3), Y.of(4))
+//				.small(X.of(4), Y.of(4))
+//				.small(X.of(3), Y.of(5))
+//				.small(X.of(4), Y.of(5));
+//		
+//		System.out.println("ゴールまで探索 3");
+//		boolean result = testRunning(builder, 1500, 0);
+//		System.out.println("ゴールまで探索 3 探索終了");
+//		if(!result) {
+//			fail("ゴールできず");
+//		}
+//	}
+
+	public static boolean testRunning(FieldBuilder builder, int maxCnt, int expectMoveCnt) {
 		FieldHistories fHistories = new FieldHistories();
 		Field field = builder.create();
 		
@@ -184,7 +151,7 @@ class FieldHistoriesTest {
 			if(field.isGoal()) {
 				System.out.println("ゴール！！！");
 				field.getMovedHistories().forEach(m->System.out.println(m.toString()));
-				return;
+				return true;
 			}
 			if(fHistories.hasMove(field)) {
 				Move move = fHistories.retrieveMove(field);
@@ -192,21 +159,23 @@ class FieldHistoriesTest {
 				if(fHistories.contains(field)) {
 					field.undo();
 				} else {
+					System.out.println(move.toString());
 					fHistories.add(field);
 				}
 				
 			} else {
 				
 				if(!field.undo()) {
-					fail("ゴール見つけられず");
-//					assertEquals(9, fHistories.size());
+//						assertEquals(expectMoveCnt, fHistories.size());
 					// 3回探索、3回Undoで終了
-//					assertEquals(6, cnt);
-					return;
+//						assertEquals(6, cnt);
+					System.out.println("解なし");
+					return false;
 				}
+				System.out.println("undo");
 			}
 			cnt++;
-			if(cnt>1000) {
+			if(cnt>maxCnt) {
 				fail("無限ループ");
 			}
 		}

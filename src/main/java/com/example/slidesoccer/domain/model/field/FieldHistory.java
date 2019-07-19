@@ -13,6 +13,7 @@ public class FieldHistory {
 		this.fieldHash = field.hashCode();
 		this.canMoves = canMoves;
 		this.count = count;
+		System.out.println("    hash[" + fieldHash + "] moves:" + canMoves.size());
 	}
 	
 	boolean isMatch(Field another) {
@@ -28,6 +29,8 @@ public class FieldHistory {
 	}
 	
 	Move retrieveMove() {
-		return canMoves.retrieve();
+		Move move = canMoves.retrieve();
+		System.out.println("    hash[" + fieldHash + "] moves:" + canMoves.size());
+		return move;
 	}
 }
