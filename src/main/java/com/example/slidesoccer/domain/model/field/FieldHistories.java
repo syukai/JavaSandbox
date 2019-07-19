@@ -9,7 +9,7 @@ import com.example.slidesoccer.domain.model.move.Move;
 
 public class FieldHistories {
 
-	private Map<Integer, FieldHistory> histories = new HashMap<Integer, FieldHistory>();
+	private Map<String, FieldHistory> histories = new HashMap<String, FieldHistory>();
 	private List<Move> movedHistories = new ArrayList<Move>();
 	
 	FieldHistories(){
@@ -17,7 +17,7 @@ public class FieldHistories {
 	}
 
 	public void add(Field field) {
-		histories.put(Integer.valueOf(field.hashCode()), field.createHistory());
+		histories.put(field.toString(), field.createHistory());
 	}
 	
 	public void refleshHistory(Field field) {
@@ -29,16 +29,16 @@ public class FieldHistories {
 	}
 
 	public boolean contains(Field field) {
-		return histories.keySet().contains(field.hashCode());
+		return histories.keySet().contains(field.toString());
 	}
 
 	public boolean hasMove(Field field) {
-		FieldHistory history = histories.get(field.hashCode());
+		FieldHistory history = histories.get(field.toString());
 		return history.hasMove();
 	}
 
 	public Move retrieveMove(Field field) {
-		FieldHistory history = histories.get(field.hashCode());
+		FieldHistory history = histories.get(field.toString());
 		return history.retrieveMove();
 	}
 

@@ -149,6 +149,14 @@ public class GeneralPanels {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+//		
+//		int panelshash = 
+//				panels.stream()
+//					.map(p->p.toString())
+//					.sorted()
+//					.collect(Collectors.toList())
+//					.hashCode();
+//		result = prime * result + ((panels == null) ? 0 : panelshash);
 		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
 		return result;
 	}
@@ -157,11 +165,14 @@ public class GeneralPanels {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
-		for(Panel p: panels) {
-			sb.append("[" + p.getClass().getSimpleName() + "]" + p.position.toString());
+		panels.stream().map(p->p.toString()).sorted().forEach(p->{
+			sb.append(p.toString());
 			sb.append(System.getProperty("line.separator"));
-		}
+			});
+//		for(Panel p: panels) {
+//			sb.append("[" + p.getClass().getSimpleName() + "]" + p.position.toString());
+//			sb.append(System.getProperty("line.separator"));
+//		}
 		return sb.toString();
 	}
 
