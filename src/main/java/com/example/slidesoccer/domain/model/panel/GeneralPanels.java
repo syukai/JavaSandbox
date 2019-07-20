@@ -169,10 +169,6 @@ public class GeneralPanels {
 			sb.append(p.toString());
 			sb.append(System.getProperty("line.separator"));
 			});
-//		for(Panel p: panels) {
-//			sb.append("[" + p.getClass().getSimpleName() + "]" + p.position.toString());
-//			sb.append(System.getProperty("line.separator"));
-//		}
 		return sb.toString();
 	}
 

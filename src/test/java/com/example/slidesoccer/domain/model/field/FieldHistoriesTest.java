@@ -104,43 +104,10 @@ class FieldHistoriesTest {
 		}
 	}
 
-//	@Test
-//	@DisplayName("ゴールまで探索 3")
-//	void testSearchGoal3() {
-//		// SSST
-//		// T SS
-//		// T WW
-//		// GGSS
-//		// GGSS
-//		builder = Field.builder()
-//				.small(X.of(1), Y.of(1))
-//				.small(X.of(2), Y.of(1))
-//				.small(X.of(3), Y.of(1))
-//				.tall(X.of(4), Y.of(1))
-//				.tall(X.of(1), Y.of(2))
-//				.small(X.of(2), Y.of(3))
-//				.small(X.of(2), Y.of(4))
-//				.wide(X.of(3), Y.of(3))
-//				.goal(X.of(1), Y.of(4))
-//				.small(X.of(3), Y.of(4))
-//				.small(X.of(4), Y.of(4))
-//				.small(X.of(3), Y.of(5))
-//				.small(X.of(4), Y.of(5));
-//		
-//		System.out.println("ゴールまで探索 3");
-//		boolean result = testRunning(builder, 1500, 0);
-//		System.out.println("ゴールまで探索 3 探索終了");
-//		if(!result) {
-//			fail("ゴールできず");
-//		}
-//	}
-
 	public static boolean testRunning(FieldBuilder builder, int maxCnt, int expectMoveCnt) {
 		FieldHistories fHistories = new FieldHistories();
 		Field field = builder.create();
-		
-		// まだ今のFieldはHistoriesに存在しない
-		assertFalse(fHistories.contains(field));
+//		System.out.println(field.toString());
 		
 		// Historyに追加
 		fHistories.add(field);
@@ -159,7 +126,6 @@ class FieldHistoriesTest {
 				if(fHistories.contains(field)) {
 					field.undo();
 				} else {
-					System.out.println(move.toString());
 					fHistories.add(field);
 				}
 				
@@ -172,7 +138,7 @@ class FieldHistoriesTest {
 					System.out.println("解なし");
 					return false;
 				}
-				System.out.println("undo");
+//				System.out.println("undo");
 			}
 			cnt++;
 			if(cnt>maxCnt) {
